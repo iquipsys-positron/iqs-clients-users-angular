@@ -1,0 +1,50 @@
+<pip-scrollable fxFlex="fill">
+    <div class="scroll-container pip-scroll">
+        <pip-selected (onSelect)="onSelect($event)" [index]="index" [disableSelect]="state == 'edit'">
+
+            <mat-nav-list [ngSwitch]="state">
+
+                <div *ngSwitchDefault>
+                    <mat-form-field appearance="fill">
+                        <mat-icon matPrefix fontIcon="webui-search"></mat-icon>
+                        <input matInput placeholder="search" [(ngModel)]="search" (ngModelChange)="filterUsersList()">
+                    </mat-form-field>
+
+                    <pip-ref-item *ngFor="let user of users; trackBy: user?.id" pipSelectable (click)="select(user?.id)"
+                        [id]="user.id" [title]="user.name" subtitle="{{user.active ? 'Active' : 'Locked'}}"
+                        [defaultIconBackground]="UserColor" [letterSource]="user.name?.toUpperCase()"></pip-ref-item>
+                </div>
+
+                <div *ngSwitchCase="'progress'">
+                    <div class="empty-state-menu"></div>
+                    <!-- <pip-empty-state class="pip-show-xs-sm">
+                <pip-empty-state-title [text]="progressText" [imageUrl]="progressImageUrl"></pip-empty-state-title>
+                <div class="pip-progress">
+                    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                </div>
+            </pip-empty-state>
+            <img class="pip-show-gt-sm pip-list-empty" src="{{ emptyListUrl }}" alt="{{ emptyListUrl || 'empty users' }}"> -->
+                </div>
+
+                <div *ngSwitchCase="'empty'">
+                    <div class="empty-state-menu"></div>
+                    <!-- <pip-empty-state class="pip-show-xs-sm">
+                <pip-empty-state-title [text]="emptyText" [subText]="emptySubText" [imageUrl]="emptyImageUrl"></pip-empty-state-title>
+                <pip-empty-state-actions [actions]="emptyStateActions"></pip-empty-state-actions>
+            </pip-empty-state>
+            <img class="pip-show-gt-sm pip-list-empty" src="{{ emptyListUrl }}" alt="{{ emptyListUrl || 'empty users' }}"> -->
+                </div>
+
+                <div *ngSwitchCase="'create'">
+                    <pip-ref-item class="pip-selectable pip-selected-item" [title]="newDeviceText"
+                        [subtitle]="newDeviceSubText" [defaultIconBackground]="UserColor" letterSource="+">
+                    </pip-ref-item>
+
+                    <pip-ref-item *ngFor="let user of users; trackBy: user?.id" (click)="select(user.id)" [id]="user.id"
+                        [title]="user.name" subtitle="{{user.active ? 'Active' : 'Locked'}}"
+                        [defaultIconBackground]="UserColor" [letterSource]="user.name?.toUpperCase()"></pip-ref-item>
+                </div>
+            </mat-nav-list>
+        </pip-selected>
+    </div>
+</pip-scrollable>

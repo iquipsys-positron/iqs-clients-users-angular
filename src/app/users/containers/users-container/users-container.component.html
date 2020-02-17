@@ -1,0 +1,79 @@
+<div fxFlex="grow">
+    <pip-menu-layout [single]="isSingle">
+        <div class="pip-menu" fxLayout="column">
+            <div class="scroll-container" fxLayout="column">
+                <users-list *ngIf="(viewState$ | async) != 'empty' && (viewState$ | async) != 'progress' || media.isMainActive('gt-sm')"
+                    [selectId]="selectId$ | async" [users]="users$ | async" [loading]="loading$ | async" [state]="viewState$ | async"
+                    (selectChange)="select($event)" (add)="initAdd()" (loadMore)="loadMoreUsers()" (filterUsers)="filterUsers($event)"  [emptyStateActions]="emptyStateActions">
+                </users-list>
+
+                <pip-empty-state *ngIf="(viewState$ | async) == 'progress' && !media.isMainActive('gt-sm')">
+                    <pip-empty-state-title [text]="'USERS.LOADING' | translate" imageUrl="./assets/progress.svg"></pip-empty-state-title>
+                    <div class="pip-progress">
+                        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                    </div>
+                </pip-empty-state>
+
+                <pip-empty-state *ngIf="(viewState$ | async) == 'empty' && !media.isMainActive('gt-sm')">
+                    <pip-empty-state-title [text]="'USERS.EMPTY.TEXT' | translate" [subText]="'USERS.EMPTY.SUBTEXT' | translate"
+                        imageUrl="./assets/empty.svg"></pip-empty-state-title>
+                    <pip-empty-state-actions [actions]="emptyStateActions"></pip-empty-state-actions>
+                </pip-empty-state>
+            </div>
+            <!-- <button mat-fab color="primary" class="pip-fab" (click)="initAdd()" *ngIf="state == 'view' || state == 'edit' || state == 'create'"
+                [disabled]="(loading$ | async) || state == 'edit' || state == 'create'">
+                <mat-icon aria-label="create">add</mat-icon>
+            </button> -->
+        </div>
+
+        <div class="pip-menu-container" [ngSwitch]="updateState$ | async">
+            <pip-document-layout *ngSwitchCase="'progress'">
+                <pip-document-content>
+                    <pip-empty-state>
+                        <pip-empty-state-title [text]="'APP.LOADING' | translate" imageUrl="./assets/progress.svg"></pip-empty-state-title>
+                        <div class="pip-progress">
+                            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+                        </div>
+                    </pip-empty-state>
+                </pip-document-content>
+            </pip-document-layout>
+            <pip-document-layout *ngSwitchCase="'empty'">
+                <pip-document-content>
+                    <pip-empty-state>
+                        <pip-empty-state-title [text]="'APP.EMPTY.TEXT' | translate" [subText]="'APP.EMPTY.SUBTEXT' | translate"
+                                               imageUrl="./assets/empty.svg"></pip-empty-state-title>
+                        <pip-empty-state-actions [actions]="emptyStateActions"></pip-empty-state-actions>
+                    </pip-empty-state>
+                </pip-document-content>
+            </pip-document-layout>
+      
+            <users-details *ngSwitchDefault [ln]="ln" [languages]="languages" 
+                                  [user]="selectUser$ | async" 
+                                  [emailSettings]="emailSettings$ | async" 
+                                  [smsSettings]="smsSettings$ | async" 
+                                  [roles]="roles$ | async" 
+                                  [activities]="activities$ | async" 
+                                  [sessions]="sessions$ | async" 
+                                  [loading]="loading$ | async"
+                                  [error]="error$ | async" 
+                                    (editEmailSettings)="editEmailSettings()"
+                                    (editSmsSettings)="editSmsSettings()"
+                                    (lockToogle)="lockToogle()"
+                                    (changePassword)="changePassword()"
+                                    (grantRole)="grantRole()"
+                                    (revokeRole)="revokeRole($event)"
+                                    (loadMoreActivities)="loadMoreActivities()"
+                                    (loadMoreSessions)="loadMoreSessions()"
+                                    (loadMoreRoles)="loadMoreRoles()"
+                                    >
+            </users-details>
+      
+            <users-details *ngSwitchCase="'create'" [ln]="ln" [languages]="languages" [user]="emptyUser" [loading]="loading$ | async"
+                                    [error]="error$ | async" 
+                                    (changeLang)="changeLn($event)"
+                                    
+                                    (cancel)="cancel()" (update)="create($event)">
+            </users-details>
+        </div>
+    </pip-menu-layout>
+</div>

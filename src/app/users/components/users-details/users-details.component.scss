@@ -1,0 +1,137 @@
+.pip-full-width {
+    width: 100%;
+}
+
+.pip-footer {
+    margin-top: 8px;
+    margin-bottom: 4px !important;
+}
+
+.pip-footer-text {
+    margin-bottom: 0px;
+}
+
+.pip-loading {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 1px;
+}
+
+.pip-progress {
+    width: 100%;
+    text-align: center;
+    mat-progress-bar {
+        max-width: 250px;
+        margin: 0 auto;
+        margin-top: 16px;
+    }
+}
+
+.app-icon {
+    margin-right: 16px!important;
+    margin-top: 20px;
+}
+
+.multilang-hint.mat-error {
+    font-size: 75%;
+    // color: rgba(0, 0, 0, 0.54);
+    position: absolute;
+    margin-top: 2.3em;
+    top: calc(100% - 1.79166667em);
+}
+
+.error-container.mat-error  {
+    padding: 8px;
+    background: #ff5252; 
+    color: white;
+    border-radius: 2px;
+    margin-bottom: 16px;
+}
+
+pip-document-content {
+    height: calc( 100% - 32px);
+}
+ 
+::ng-deep .mat-list.object-list .mat-list-item .mat-list-item-content {
+    padding: 0px;
+}
+
+::ng-deep pip-action-list .long-button.pip-action-list-item {
+    max-width: 200px !important;
+}
+
+
+pip-document-content img {
+    width: 64px;
+    height: 64px;
+    margin-right: 16px;
+}
+
+p.details-header-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.details-header div p {
+    margin: 0px;
+    display: inline-block;
+}
+
+.details-header div{
+    display: inline-block;
+}
+
+p.details-info-section{
+    color: #333;
+    margin: 24px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+p.details-info-data{
+    font-weight: bold;
+    margin-top: 0;
+}
+
+
+p.details-info-title{
+    color: #ccc;
+    margin-bottom: 0;
+
+}
+
+.mat-tab-container {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    overflow: hidden;
+}
+
+pip-document-content {
+    height: calc( 100% - 32px);
+    & > div {
+        flex: 0 1 100%;
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        mat-tab-group {
+            flex-grow: 1;
+        }
+    }
+}
+
+::ng-deep #tab-group .mat-tab-body-wrapper {
+    // flex-grow: 1;
+    flex: 1 1 100%;
+}
+
+::ng-deep mat-tab-body {
+    flex-grow: 1;
+}
+
+::ng-deep .mat-tab-body-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}

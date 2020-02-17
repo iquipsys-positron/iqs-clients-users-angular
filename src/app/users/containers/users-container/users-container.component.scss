@@ -1,0 +1,132 @@
+:host {
+    background-color: #eee;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    flex: 1;
+}
+
+.empty-state-menu {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: url('../../../../assets/menu-empty.svg');
+}
+
+pip-selected {
+    padding-bottom: 8px;
+}
+
+// pip-document-content {
+//     padding: 0 !important;
+// }
+
+.bordered-block {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.bordered-block div {
+    padding: 16px;
+}
+
+.bordered-block-menu-item-inactive {
+    background-color: #fff;
+}
+
+.bordered-block-menu-item:hover, .bordered-block-menu-item-active {
+    cursor: pointer;
+    background-color: #eee;
+}
+
+.bordered-block i {
+    color: #777;
+    margin-right: 16px;
+}
+
+.bordered-block span {
+    position: relative;
+    top: -5px;
+}
+
+.bordered-block span.bordered-block-list-item-title {
+    font-weight: bold;
+}
+
+.bordered-block span.bordered-block-list-item-secondary {
+    float: right;
+    top: 0;
+}
+
+
+.list-item-title {
+    margin: 0;
+    font-weight: bold;
+}
+
+.list-item-description {
+    margin: 0;
+    color: #777;
+}
+
+mat-list-item img {
+    width: 32px;
+    height: 32px;
+    margin-right: 16px;
+}
+
+.list-item-status-label{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 12px;
+    background-color: #ccc;
+    color: #777;
+    -moz-border-radius: 40px 0 0 40px;  // rounds corners for firefox
+    border-radius: 40px 0 0 40px;
+    padding: 8px 16px;
+    position: absolute;
+    right: 0;
+}
+
+.pip-selectable.pip-selected-item .list-item-status-label {
+    right: 2px;
+}
+
+pip-document-content img {
+    width: 64px;
+    height: 64px;
+    margin-right: 16px;
+}
+
+p.details-header-name {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.details-header div p {
+    margin: 0px;
+    display: inline-block;
+}
+
+.details-header div{
+    display: inline-block;
+}
+
+p.details-info-section{
+    color: #333;
+    margin: 24px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+p.details-info-data{
+    font-weight: bold;
+    margin-top: 0;
+}
+
+p.details-info-title{
+    color: #ccc;
+    margin-bottom: 0;
+
+}

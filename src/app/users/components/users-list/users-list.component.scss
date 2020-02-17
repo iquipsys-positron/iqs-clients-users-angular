@@ -1,0 +1,91 @@
+:host {
+    display: block; //position: relative;
+    height: 100%;
+}
+
+.pip-footer {
+    margin-top: 8px;
+    margin-bottom: 4px !important;
+}
+
+.pip-footer-text {
+    margin-bottom: 0px;
+}
+
+.pip-loading {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 1px;
+}
+
+.pip-progress {
+    width: 100%;
+    text-align: center;
+    mat-progress-bar {
+        max-width: 250px;
+        margin: 0 auto;
+        margin-top: 16px;
+    }
+}
+
+.pip-list-empty {
+    width: 100%;
+    height: 100%;
+}
+
+::ng-deep .pip-gt-sm {
+    devices-list {
+        .pip-show-gt-sm {
+            display: block;
+        }
+        .pip-show-xs-sm {
+            display: none;
+        }
+    }
+}
+
+::ng-deep .pip-sm,
+::ng-deep .pip-xs {
+    devices-list {
+        .pip-show-gt-sm {
+            display: none;
+        }
+        .pip-show-xs-sm {
+            display: block;
+        }
+    }
+}
+
+:host {
+    display: block;
+    position: relative;
+    height: 100%;
+    max-height: 100%;
+}
+
+.empty-state-menu {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: url('../../../../assets/menu-empty.svg');
+}
+
+.scroll-container {
+    height: calc(100% - 0px);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.mat-form-field {
+    width: -webkit-fill-available;
+    margin: 0 8px;
+}
+
+// mat-form-field.search-field {
+//     max-width: 1280px;
+//     padding-top: 16px;
+//     padding-bottom: 16px;
+//     display: block;
+//     margin: 0 auto;
+// }

@@ -1,0 +1,21 @@
+
+stages:
+  - test
+  - build and deploy
+
+test:
+  stage: test
+  script:
+  - echo "Testing project"
+  - ./test.ps1
+
+build_deploy:
+  stage: build and deploy
+  script:
+  - echo "Build and deploy admin tool to production aws account"
+  - ./build.ps1
+  - ./deploy.ps1
+  after_script:
+  - ./clean.ps1  
+  environment:
+    name: prod

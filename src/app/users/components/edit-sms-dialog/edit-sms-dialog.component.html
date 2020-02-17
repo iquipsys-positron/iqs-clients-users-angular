@@ -1,0 +1,24 @@
+<h1 mat-dialog-title class="pip-header">{{ 'DIALOG_TITLE' | translate }}</h1>
+<div mat-dialog-content class="pip-content">
+  <mat-progress-bar mode="indeterminate" class="pip-loading" *ngIf="loading$ | async"></mat-progress-bar>
+  <p *ngIf="error" class="pip-error">
+    {{ (error.message || error) | translate}}
+  </p>
+  <form fxLayout="column" fxLayoutGap="16px" [formGroup]="form">
+    <mat-form-field>
+      <input matInput [placeholder]="'PHONE_INPUT' | translate" formControlName="phone" required>
+      <mat-error *ngIf="hasError('phone', 'required')">{{'PHONE_INPUT_ERROR' | translate}}</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [placeholder]="'LANGUAGE_INPUT' | translate" formControlName="language" required>
+      <mat-error *ngIf="hasError('language', 'required')">{{'LANGUAGE_INPUT_ERROR' | translate}}</mat-error>
+      <mat-error *ngIf="hasError('language', 'pattern')">{{'LANGUAGE_INPUT_ERROR' | translate}}</mat-error>
+    </mat-form-field>
+    <mat-slide-toggle matInput formControlName="verified">{{'VERIFIED_SLIDER' | translate}}</mat-slide-toggle>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()" [disabled]="loading$ | async">{{ 'DIALOG_CANCEL' | translate }}</button>
+  <button mat-button (click)="onSubmit()" [disabled]="!form.valid || (loading$ | async)" cdkFocusInitial>{{
+    'DIALOG_OK' | translate }}</button>
+</div>

@@ -1,0 +1,135 @@
+<pip-document-layout>
+    <pip-document-content>
+        <div>
+            <mat-progress-bar mode="indeterminate" *ngIf="loading" class="pip-loading"></mat-progress-bar>
+
+            <div class="details-header">
+                <img src="http://api.positron.stage.iquipsys.net:30018/api/v1/blobs/{{ currentUser?.id }}">
+
+                <div>
+                    <p class="details-header-name">{{ currentUser?.name }}</p>
+                    <br>
+                    <p>Since {{ currentUser?.create_time | date: 'dd/MMM/yyyy'}}</p>
+                    <br>
+                    <p>ID: {{ currentUser?.id }}</p>
+                </div>
+
+            </div>
+
+            <mat-tab-group id="tab-group" (selectedIndexChange)="onTabChange($event)"
+                pipInfiniteScroll (onInfiniteScroll)="loadMore()" scrollContainer="pip-scrollable-content"
+                scrollListenForEvent="windowResized" scrollDistance="0.1">
+                <mat-tab #tab_info label="{{ 'USER_DETAILS_TAB_ACCOUNT_INFO' | translate }}">
+                    <div class="mat-tab-container">
+                        <p class="details-info-title">{{ 'USER_DETAILS_ACCOUNT_LOGIN' | translate }}</p>
+                        <p class="details-info-data">{{ currentUser?.login }}</p>
+
+                        <p class="details-info-title">{{ 'USER_DETAILS_ACCOUNT_LANGUAGE' | translate }}</p>
+                        <p class="details-info-data">{{ currentUser?.language }}</p>
+
+                        <p class="details-info-title">{{ 'USER_DETAILS_ACCOUNT_THEME' | translate }}</p>
+                        <p class="details-info-data">{{ currentUser?.theme }}</p>
+
+                        <p class="details-info-title">{{ 'USER_DETAILS_ACCOUNT_TIME_ZONE' | translate }}</p>
+                        <p class="details-info-data">{{ currentUser?.time_zone }}</p>
+                    </div>
+                </mat-tab>
+                <mat-tab #tab_email label="{{ 'USER_DETAILS_TAB_EMAIL_SETTINGS' | translate }}">
+                    <div class="mat-tab-container">
+                        <p class="details-info-title">{{ 'USER_DETAILS_EMAIL_SETTINGS_EMAIL' | translate }}</p>
+                        <p class="details-info-data">{{ currEmailSettings?.email }}</p>
+
+                        <p class="details-info-title">{{ 'USER_DETAILS_EMAIL_SETTINGS_LANGUAGE' | translate }}</p>
+                        <p class="details-info-data">{{ currEmailSettings?.language }}</p>
+
+                        <p class="details-info-title">{{ 'USER_DETAILS_EMAIL_SETTINGS_VERIFIED' | translate }}</p>
+                        <p class="details-info-data">{{ currEmailSettings?.verified }}</p>
+                    </div>
+                </mat-tab>
+                <mat-tab #tab_sms label="{{ 'USER_DETAILS_TAB_SMS_SETTINGS' | translate }}">
+                    <div class="mat-tab-container">
+                        <p class="details-info-title">{{ 'USER_DETAILS_SMS_SETTINGS_PHONE' | translate }}</p>
+                        <p class="details-info-data">{{ currSmsSettings?.phone }}</p>
+
+                        <p class="details-info-title">{{ 'USER_DETAILS_SMS_SETTINGS_LANGUAGE' | translate }}</p>
+                        <p class="details-info-data">{{ currSmsSettings?.language }}</p>
+
+                        <p class="details-info-title">{{ 'USER_DETAILS_SMS_SETTINGS_VERIFIED' | translate }}</p>
+                        <p class="details-info-data">{{ currSmsSettings?.verified }}</p>
+                    </div>
+                </mat-tab>
+                <mat-tab #tab_roles label="{{ 'USER_DETAILS_TAB_ROLES' | translate }}">
+                    <div class="mat-tab-container">
+                        <ul *ngFor="let item of currRoles;">
+                            <li>{{ item }} <button mat-icon-button title="{{ 'REVOKE_ACCESS_BTN_TEXT' | translate }}"
+                                    (click)="onRevokeRole(item)"><i class="material-icons">clear</i></button></li>
+                        </ul>
+                        <button mat-button (click)="onGrantRole()">
+                            <i class="material-icons">add_circle</i>
+                            <span> {{'GRANT_ROLE_BTN_TEXT' | translate }} </span>
+                        </button>
+                    </div>
+                </mat-tab>
+                <mat-tab #tab_activities label="{{ 'USER_DETAILS_TAB_ACTIVITIES' | translate }}">
+                    <div class="mat-tab-container">
+                        <ul *ngFor="let item of currActivities;">
+                            <li>
+                                <p>{{ item.type }}</p>
+                                <p>{{ item.time }}</p>
+                                <p>{{ item.id }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </mat-tab>
+                <mat-tab #tab_sessions label="{{ 'USER_DETAILS_TAB_SESSIONS' | translate }}">
+                    <div class="mat-tab-container">
+                        <ul *ngFor="let item of currSessions;">
+                            <li>
+                                <p>Address: {{ item.address }}</p>
+                                <p>Client: {{ item.client }}</p>
+                                <p>Open time: {{ item.open_time }}</p>
+                                <p>Close time: {{ item.close_time }}</p>
+                                <p>Active: {{ item.active }}</p>
+                                <p>ID: {{ item.id }}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+
+            <mat-error *ngIf="error" class="error-container">
+                {{ getErrorMessage(error) }}
+            </mat-error>
+
+        </div>
+    </pip-document-content>
+    <pip-document-footer>
+        <pip-action-list>
+            <button mat-button class="pip-action-list-item" (click)="onEditEmailSettings()" [disabled]="loading">
+                <mat-icon fontSet="webui" fontIcon="webui-message"></mat-icon>
+                <span class="pip-title">{{ 'USERS.EDIT_EMAIL_SETTINGS_BTN' | translate }}</span>
+            </button>
+
+            <button mat-button class="pip-action-list-item" (click)="onEditSmsSettings()" [disabled]="loading">
+                <mat-icon fontSet="webui" fontIcon="webui-phone"></mat-icon>
+                <span class="pip-title">{{ 'USERS.EDIT_PHONE_SETTINGS_BTN' | translate }}</span>
+            </button>
+
+            <button mat-button class="pip-action-list-item" (click)="onAccountLock()" [disabled]="loading">
+                <ng-container *ngIf="!currentUser?.active">
+                    <mat-icon fontSet="webui" fontIcon="webui-unlock"></mat-icon>
+                    <span class="pip-title">{{ 'USERS.UNLOCK_BTN' | translate }}</span>
+                </ng-container>
+                <ng-container *ngIf="currentUser?.active">
+                    <mat-icon fontSet="webui" fontIcon="webui-lock"></mat-icon>
+                    <span class="pip-title">{{ 'USERS.LOCK_BTN' | translate }}</span>
+                </ng-container>
+            </button>
+
+            <button mat-button class="pip-action-list-item" (click)="onChangePassword()" [disabled]="loading">
+                <mat-icon fontSet="webui" fontIcon="webui-key"></mat-icon>
+                <span class="pip-title">{{ 'USERS.CHANGE_PASSWORD_BTN' | translate }}</span>
+            </button>
+        </pip-action-list>
+    </pip-document-footer>
+</pip-document-layout>

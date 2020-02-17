@@ -1,0 +1,53 @@
+export const UsersContainerTranslations = {
+    en: {
+
+        'APP_BREADCRUMB_TEXT': 'Users',
+
+        'USERS.LOADING': 'Loading users',
+        'USERS.EMPTY.TEXT': 'No users found',
+        'USERS.EMPTY.SUBTEXT': '',
+        'Users': 'User management',
+        'USERS.ROLES': 'Roles',
+        'USERS.ACTIVITIES': 'Activities',
+        'USERS.SESSIONS': 'Sessions',
+        'GRANT_ROLE_BTN_TEXT': 'Grant new role',
+        'REVOKE_ACCESS_BTN_TEXT': 'Revoke role',
+        'CONFIRM_REVOKE_ACCESS_TITLE': 'Are you really want to revoke access from this user?',
+        'CONFIRM_REVOKE_ACCESS_DESCRIPTION': 'This action will remove selected role from selected user',
+        'CONFIRM_REVOKE_ACCESS_BTN_CANCEL': 'Cancel',
+        'CONFIRM_REVOKE_ACCESS_BTN_OK': 'Revoke',
+        'USERS.CHANGE_PASSWORD_BTN': 'Change password',
+        'USERS.LOCK_BTN': 'Lock',
+        'USERS.EDIT_PHONE_SETTINGS_BTN': 'Edit phone settings',
+        'USERS.EDIT_EMAIL_SETTINGS_BTN': 'Edit email settings',
+        'REVOKE_ROLE.DIALOG.TITLE': 'Confirm action',
+        'REVOKE_ROLE.DIALOG.MESSAGE': 'Revoke selected user role?',
+        'REVOKE_ROLE.DIALOG.BUTTON.CANCEL': 'Cancel',
+        'REVOKE_ROLE.DIALOG.BUTTON.OK': 'Revoke',
+        
+    },
+    ru: {
+        'APP_BREADCRUMB_TEXT': 'Пользователи',
+
+        'USERS.LOADING': 'Загрузка пользователей',
+        'Users': 'Управление пользователями',
+        'USERS.ROLES': 'Роли',
+        'USERS.ACTIVITIES': 'Активности',
+        'USERS.SESSIONS': 'Сессии',
+        'GRANT_ROLE_BTN_TEXT': 'Добавить роль',
+        'REVOKE_ACCESS_BTN_TEXT': 'Удалить роль',
+        'CONFIRM_REVOKE_ACCESS_TITLE': 'Вы действительно хотите удалить роль?',
+        'CONFIRM_REVOKE_ACCESS_DESCRIPTION': 'Подтверждая этот диалог вы удалите выбранную роль у выбранного пользователя',
+        'CONFIRM_REVOKE_ACCESS_BTN_CANCEL': 'Отмена',
+        'CONFIRM_REVOKE_ACCESS_BTN_OK': 'Удалить',
+        'USERS.CHANGE_PASSWORD_BTN': 'Изменить пароль',
+        'USERS.LOCK_BTN': 'Заблокировать',
+        'USERS.UNLOCK_BTN': 'Разблокировать',
+        'USERS.EDIT_PHONE_SETTINGS_BTN': 'Изменить настройки телефона',
+        'USERS.EDIT_EMAIL_SETTINGS_BTN': 'Изменить настройки почты',
+        'REVOKE_ROLE.DIALOG.TITLE': 'Подтвердите действие',
+        'REVOKE_ROLE.DIALOG.MESSAGE': 'Удалить у пользователя выбранную роль?',
+        'REVOKE_ROLE.DIALOG.BUTTON.CANCEL': 'Отмена',
+        'REVOKE_ROLE.DIALOG.BUTTON.OK': 'Удалить',
+    }
+};
