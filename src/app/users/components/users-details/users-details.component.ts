@@ -1,12 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
-import { cloneDeep } from 'lodash';
-import { User, EmailSettings, SmsSettings, Activity, Session } from './../../models';
-import { Subscription } from 'rxjs';
-import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { filter, take } from 'rxjs/operators';
-import { UsersService } from '../../services/users.service';
+import { IqsSessionConfigService } from 'iqs-libs-clientshell2-angular';
 import { TranslateService } from '@ngx-translate/core';
+
 import { UserDetailsTranslations } from './user-details.strings';
+import { User, EmailSettings, SmsSettings, Activity, Session } from './../../models';
 
 
 import * as _ from 'lodash';
@@ -18,11 +15,14 @@ import * as _ from 'lodash';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersDetailsComponent implements OnInit, OnChanges {
+
+    public blobsUrl: string;
     public currEmailSettings: EmailSettings;
     public currSmsSettings: SmsSettings;
     public currRoles: string[];
     public currActivities: Activity[];
     public currSessions: Session[];
+    public UserColor = '#004d40';
 
     private _currTabIndex: number;
 
@@ -67,10 +67,12 @@ export class UsersDetailsComponent implements OnInit, OnChanges {
     @Output() loadMoreRoles = new EventEmitter();
 
     public constructor(
+        private sessionConfig: IqsSessionConfigService,
         private translate: TranslateService
     ) {
         this.translate.setTranslation('en', UserDetailsTranslations.en, true);
         this.translate.setTranslation('ru', UserDetailsTranslations.ru, true);
+        this.blobsUrl = this.sessionConfig.serverUrl + '/api/v1/blobs/';
     }
 
     public onTabChange(index: number) {
@@ -82,13 +84,7 @@ export class UsersDetailsComponent implements OnInit, OnChanges {
 
     }
 
-    public ngOnInit() {
-
-    }
-
-    public ngOnDestroy() {
-
-    }
+    public ngOnInit() { }
 
     public deleteSubmit(): void {
         // this.delete.emit(this.updateItem.id);
@@ -129,7 +125,7 @@ export class UsersDetailsComponent implements OnInit, OnChanges {
                 this.loadMoreActivities.emit();
                 break;
             case 5:
-                //sessions
+                // sessions
                 this.loadMoreSessions.emit();
                 break;
             default: break;

@@ -11,7 +11,7 @@
                     </mat-form-field>
 
                     <pip-ref-item *ngFor="let user of users; trackBy: user?.id" pipSelectable (click)="select(user?.id)"
-                        [id]="user.id" [title]="user.name" subtitle="{{user.active ? 'Active' : 'Locked'}}"
+                        [id]="user.id" [title]="user.name" [img]="blobsUrl + user?.id" subtitle="{{user.active ? 'Active' : 'Locked'}}"
                         [defaultIconBackground]="UserColor" [letterSource]="user.name?.toUpperCase()"></pip-ref-item>
                 </div>
 
@@ -41,7 +41,7 @@
                     </pip-ref-item>
 
                     <pip-ref-item *ngFor="let user of users; trackBy: user?.id" (click)="select(user.id)" [id]="user.id"
-                        [title]="user.name" subtitle="{{user.active ? 'Active' : 'Locked'}}"
+                        [title]="user.name" [img]="blobsUrl + user?.id" subtitle="{{user.active ? 'Active' : 'Locked'}}"
                         [defaultIconBackground]="UserColor" [letterSource]="user.name?.toUpperCase()"></pip-ref-item>
                 </div>
             </mat-nav-list>

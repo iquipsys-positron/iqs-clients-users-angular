@@ -4,7 +4,9 @@
             <mat-progress-bar mode="indeterminate" *ngIf="loading" class="pip-loading"></mat-progress-bar>
 
             <div class="details-header">
-                <img src="http://api.positron.stage.iquipsys.net:30018/api/v1/blobs/{{ currentUser?.id }}">
+                <pip-picture matListAvatar resize="false" class="square-s rounded" [src]="blobsUrl + currentUser?.id"
+                    [letterIcon]="currentUser?.name?.toUpperCase()" [backgroundColor]="UserColor"
+                    foregroundColor="white"></pip-picture>
 
                 <div>
                     <p class="details-header-name">{{ currentUser?.name }}</p>
@@ -16,8 +18,8 @@
 
             </div>
 
-            <mat-tab-group id="tab-group" (selectedIndexChange)="onTabChange($event)"
-                pipInfiniteScroll (onInfiniteScroll)="loadMore()" scrollContainer="pip-scrollable-content"
+            <mat-tab-group id="tab-group" (selectedIndexChange)="onTabChange($event)" pipInfiniteScroll
+                (onInfiniteScroll)="loadMore()" scrollContainer="pip-scrollable-content"
                 scrollListenForEvent="windowResized" scrollDistance="0.1">
                 <mat-tab #tab_info label="{{ 'USER_DETAILS_TAB_ACCOUNT_INFO' | translate }}">
                     <div class="mat-tab-container">

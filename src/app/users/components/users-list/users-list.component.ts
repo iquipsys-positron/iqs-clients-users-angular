@@ -1,12 +1,15 @@
-import { Component, OnInit, OnDestroy, Input, Output, EventEmitter, ChangeDetectionStrategy, OnChanges, SimpleChanges, ElementRef, ViewChild, AfterViewInit, ContentChild } from '@angular/core';
+import {
+    Component, OnInit, OnDestroy, Input, Output, EventEmitter,
+    ChangeDetectionStrategy, OnChanges, SimpleChanges, ElementRef, AfterViewInit
+} from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-
 import { findIndex, debounce } from 'lodash';
-import { PipMediaService, PipScrollableComponent } from 'pip-webui2-layouts';
+import { IqsSessionConfigService } from 'iqs-libs-clientshell2-angular';
+import { fromEvent, Subscription } from 'rxjs';
+
+import { PipMediaService } from 'pip-webui2-layouts';
 
 import { ViewState, User } from '../../models';
-import { from, fromEvent, Subscription } from 'rxjs';
-import { PipSelectedComponent } from 'pip-webui2-behaviors';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -16,7 +19,9 @@ import { PipSelectedComponent } from 'pip-webui2-behaviors';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersListComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
+
     private subs: Subscription;
+    public blobsUrl: string;
     public index: number;
     public withouAttachedObjectLabel: string;
 
@@ -45,11 +50,13 @@ export class UsersListComponent implements OnInit, OnDestroy, OnChanges, AfterVi
 
     public constructor(
         public media: PipMediaService,
+        private sessionConfig: IqsSessionConfigService,
         private translate: TranslateService,
         private elRef: ElementRef
     ) {
         this.subs = new Subscription();
         this.withouAttachedObjectLabel = this.translate.instant('USER_LIST_WITHOUT_OBJECT_LABEL');
+        this.blobsUrl = this.sessionConfig.serverUrl + '/api/v1/blobs/';
     }
 
     public ngOnInit() {
